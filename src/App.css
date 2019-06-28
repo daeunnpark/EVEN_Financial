@@ -1,3 +1,4 @@
+/*
 .App {
   text-align: center;
 }
@@ -30,4 +31,43 @@
   to {
     transform: rotate(360deg);
   }
+}
+*/
+body {
+  margin:0 auto;
+  /*background-color: red;*/
+  /*style="background-color:#166bcc;"*/
+}
+
+Navbar, footer {
+  background-color:#166bcc;
+  color:white;
+}
+hr{
+
+  /* Thick red border */
+
+  border: 1px solid grey;
+
+}
+
+.searchEngine {
+  padding: 50px;
+  text-align:center;
+}
+
+.inputsContainer {
+  margin: 50px;
+}
+
+.form-group, .form-check{
+  width:500px;
+  /*margin:auto;*/
+
+  text-align:left;
+  display: inline-block;
+}
+
+table, th, td {
+  border: 1px solid black;
 }
