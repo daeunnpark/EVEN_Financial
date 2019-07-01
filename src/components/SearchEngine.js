@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+//import axios from 'axios';
 import PropTypes from 'prop-types';
 
 
@@ -6,42 +7,118 @@ class SearchEngine extends Component{
   state = {
         text: '',
         stars: '',
-        license: '',
+        license: 'mit', // by default
         incForked: false
   }
 
-  //onChange = (e) => this.setState({[e.target.name]: e.target.value});
 
-  onChange  = (e) => {
+  onChange = (event) => {
     //e.preventDefault();
-    console.log(this.state);
 
-    if(e.target.type === 'checkbox'){
-      this.setState({[e.target.name]: !e.target.value});
-    }
-    //this.
-    //this.props.addTodo(this.state.tex);
-    /*this.setState({text: ''});*/
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+
   }
 
 
-  onSubmit  = (e) => {
-    e.preventDefault();
+  onSubmit  = (event) => {
+    event.preventDefault();
+    console.log("submitted");
     console.log(this.state);
-    //this.
-    //this.props.addTodo(this.state.tex);
-    /*this.setState({text: ''});*/
+
+/*
+    jquery in:name
+    stars:500
+    stars:10..20
+    	stars:>=500 fork:true
+      >, >=, <, and <=
+      license:apache-2.0
+*/
+
+/*
+    axios.get('https://api.github.com/search/repositories', {
+        params: {
+            q: 'EVEN_Financial+user:daeunnpark'
+        }
+    }).then(res => console.log(res.data))
+*/
+
+const axios = require('axios');
+
+    const text = this.state.text;
+    const stars = this.state.stars;
+    const license = this.state.license;
+    var incForked = this.state.incForked;
+
+    console.log("incForked is" + this.state.incForked);
+    /*
+    if(this.state.incForked){
+      incForked = "fork:true";
+    }
+    console.log("incForked is" + incForked);
+*/
+
+
+
+//`${text} stars:${stars} `
+//'hello stars:100'
+//`${base_url}q=${text}+stars:${stars}+license:${license}${incForked}`
+    axios.get('https://api.github.com/search/repositories', {
+        params: {
+          q: `${text} stars:${stars} license:${license} fork:${incForked}`
+        }
+      })
+      .then(function (response) {
+        console.log(response);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+
+      //You can use paramsSerializer and serialize parameters with https://www.npmjs.com/package/qs
+
+/*
+      var base_url = "https://api.github.com/search/repositories?";
+      var final_url = `${base_url}q=${text}+stars:${stars}+license:${license}${incForked}`;
+
+
+      console.log("FINAL URL IS "+ final_url);
+
+      axios.get(final_url)
+        .then(function (response) {
+          // handle success
+          //console.log(response);
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .finally(function () {
+          // always executed
+
+        });
+
+*/
   }
 
   render(){
-
 
 
     /* Search Engine */
   return  <div className = "searchEngine">
       <h3>Even Financial GitHub Repository Search</h3>
 
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.onSubmit}>
         <div>
 
           {/* inputsContainer*/}
@@ -60,7 +137,7 @@ class SearchEngine extends Component{
               </div>
               <div className="form-group">
                 <label>
-                  Text
+                  Stars
                   <input
                     type="text"
                     name = "stars"
@@ -75,11 +152,11 @@ class SearchEngine extends Component{
               <div className="form-group">
                 <label>
                   License
-                  <select value={this.state.license} onChange={this.onChange}>
-                    <option value="FIRST">FIRST</option>
-                    <option value="SECOND">SECOND</option>
-                    <option value="THIRD">THIRD</option>
-                    <option value="FOURTH">FOURTH</option>
+                  <select name ="license" value={this.state.license} onChange={this.onChange}>
+                    <option value="mit">MIT</option>
+                    <option value="isc">ISC</option>
+                    <option value="apache-2.0">Apache</option>
+                    <option value="gpl">GPL</option>
                   </select>
                 </label>
               </div>
