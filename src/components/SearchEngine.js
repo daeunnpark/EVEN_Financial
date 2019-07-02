@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 
 
 class SearchEngine extends Component{
+
   state = {
         text: '',
         stars: '',
-        license: 'mit', // by default
+        license: 'mit', // Default value
         incForked: false
   }
-
 
   onChange = (event) => {
     //e.preventDefault();
@@ -26,89 +26,30 @@ class SearchEngine extends Component{
   }
 
 
-  onSubmit  = (event) => {
+  onSubmit = (event) => {
     event.preventDefault();
     console.log("submitted");
     console.log(this.state);
+    var list = [];
 
-/*
-    jquery in:name
-    stars:500
-    stars:10..20
-    	stars:>=500 fork:true
-      >, >=, <, and <=
-      license:apache-2.0
-*/
+    const axios = require('axios');
 
-/*
-    axios.get('https://api.github.com/search/repositories', {
+    var base_url = "https://api.github.com/search/repositories";
+
+    // https://developer.github.com/v3/search/#constructing-a-search-query
+    axios.get(base_url, {
         params: {
-            q: 'EVEN_Financial+user:daeunnpark'
+          q: `${this.state.text} stars:${this.state.stars} license:${this.state.license} fork:${this.state.incForked}`
         }
-    }).then(res => console.log(res.data))
-*/
+    })
+    .then(res =>{console.log(res.data.items); this.props.setResult(res.data.items)})
+    .catch(function (error) {
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
 
-const axios = require('axios');
-
-    const text = this.state.text;
-    const stars = this.state.stars;
-    const license = this.state.license;
-    var incForked = this.state.incForked;
-
-    console.log("incForked is" + this.state.incForked);
-    /*
-    if(this.state.incForked){
-      incForked = "fork:true";
-    }
-    console.log("incForked is" + incForked);
-*/
-
-
-
-//`${text} stars:${stars} `
-//'hello stars:100'
-//`${base_url}q=${text}+stars:${stars}+license:${license}${incForked}`
-    axios.get('https://api.github.com/search/repositories', {
-        params: {
-          q: `${text} stars:${stars} license:${license} fork:${incForked}`
-        }
-      })
-      .then(function (response) {
-        console.log(response);
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
-
-      //You can use paramsSerializer and serialize parameters with https://www.npmjs.com/package/qs
-
-/*
-      var base_url = "https://api.github.com/search/repositories?";
-      var final_url = `${base_url}q=${text}+stars:${stars}+license:${license}${incForked}`;
-
-
-      console.log("FINAL URL IS "+ final_url);
-
-      axios.get(final_url)
-        .then(function (response) {
-          // handle success
-          //console.log(response);
-          console.log(response.data);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .finally(function () {
-          // always executed
-
-        });
-
-*/
   }
 
   render(){
@@ -183,43 +124,8 @@ const axios = require('axios');
     </div>
     {/* Search Engine */}
 
-
-    /*
-
-    return <form onSubmit = {this.onSubmit} >
-    <input
-      type = "text"
-      name = "text"
-      value = {this.state.text}
-      onChange = {this.onChange}
-    />
-    <input
-      type = "text"
-      name = "stars"
-      value = {this.state.stars}
-      onChange = {this.onChange}
-    />
-    <input
-      type = "submit"
-      value = "Submit"
-      name = "title"
-    />
-    </form>
-    */
   }
 }
 
 
 export default SearchEngine;
-
-
-  /*
-state = {
-    searchOptions : '',
-      text: '',
-      stars: '',
-      license: '',
-      incForked: false
-
-    }
-*/

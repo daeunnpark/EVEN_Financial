@@ -1,3 +1,16 @@
+/*
+- Repo name
+- Repo owner's name
+- URL to the repo
+- Description
+- Number of stars
+- License
+- Whether or not the repo is forked
+*/
+
+
+
+
 //SearchEngine.js
 
 
