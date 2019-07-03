@@ -13,7 +13,10 @@ import Footer from './components/Footer';
 import Loader from 'react-loader-advanced';
 
 
-
+/**
+ * Main UI
+ * @extends Component
+ */
 class App extends Component{
 
   state = {
@@ -22,10 +25,18 @@ class App extends Component{
     search_results: [],
   }
 
+  /**
+   * Sets loading(state)
+   * @param {Boolean} bool Value to assign
+   */
   setLoading = (bool) =>{
     this.setState({loading : bool});
   }
 
+  /**
+   * Sets search_results(state) to list, updates loading(state) and msg(state)
+   * @param {Array} list Response from HTTP Request
+   */
   setResult = (list) =>{
     const new_msg =  list.length === 0 ? App.NORESULTS : App.RESULTS;
 
