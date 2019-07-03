@@ -1,8 +1,8 @@
-/*
+
 .App {
   text-align: center;
 }
-
+/*
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -39,10 +39,26 @@ body {
   /*style="background-color:#166bcc;"*/
 }
 
-Navbar, footer {
-  background-color:#166bcc;
+#footer, #header {
+  background-color: #39D1B4;
   color:white;
+  height: 70px;
+
 }
+
+#header{
+  text-align:left;
+  padding:10px 50px;
+  border-bottom:20px;
+  margin-bottom: 20px;
+}
+
+#footer{
+  margin-top: 20px;
+  padding: 20px;
+}
+
+
 hr{
 
   /* Thick red border */
@@ -51,7 +67,13 @@ hr{
 
 }
 
-.searchEngine {
+.btn.btn-primary{
+  font-size:15px;
+  font-weight: bold;
+  padding:10px 50px;
+}
+
+.searchEngine, .searchMsg  {
   padding: 50px;
   text-align:center;
 }
@@ -59,15 +81,33 @@ hr{
 .inputsContainer {
   margin: 50px;
 }
+.container{
+  margin:100px;
+}
 
-.form-group, .form-check{
-  width:500px;
+.form-group, .container2{
+  width:400px;
   /*margin:auto;*/
 
-  text-align:left;
+  /*text-align:center;*/
   display: inline-block;
 }
 
-table, th, td {
-  border: 1px solid black;
+.label{
+  font-size: 15px;
+  margin: 1px;
+
+  /*text-align:left;*/
+  display: block;
+}
+
+#checkboxLabel{
+  text-align:left;
+}
+
+.form-group label{
+  /*margin:auto;*/
+
+  /*text-align:left;*/
+  display: block;
 }

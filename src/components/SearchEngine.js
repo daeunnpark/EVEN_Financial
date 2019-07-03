@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import axios from 'axios';
 import PropTypes from 'prop-types';
+import '../App.css';
 
 
 class SearchEngine extends Component{
@@ -9,7 +10,8 @@ class SearchEngine extends Component{
         text: '',
         stars: '',
         license: 'mit', // Default value
-        incForked: false
+        incForked: false,
+
   }
 
   onChange = (event) => {
@@ -27,10 +29,13 @@ class SearchEngine extends Component{
 
 
   onSubmit = (event) => {
+
     event.preventDefault();
+
+    this.props.setLoading(true);
+
     console.log("submitted");
     console.log(this.state);
-    var list = [];
 
     const axios = require('axios');
 
@@ -66,50 +71,58 @@ class SearchEngine extends Component{
           <div className = "inputsContainer">
             <div className = "container">
               <div className="form-group">
-                <label>
+                <label className = "label">
                   Text
-                  <input
-                    type="text"
-                    name = "text"
-                    value={this.state.text}
-                    onChange={this.onChange}
-                  />
                 </label>
+                <input
+                  type="text"
+                  name = "text"
+                  value={this.state.text}
+                  onChange={this.onChange}
+                  required
+                />
+
+
               </div>
               <div className="form-group">
-                <label>
+                <label className = "label">
                   Stars
-                  <input
+                </label>
+                <input
                     type="text"
                     name = "stars"
                     value={this.state.stars}
                     onChange={this.onChange}
-                  />
-                </label>
+                    required
+                    pattern="(>|<|>=|<=)?[0-9]+"
+                />
               </div>
             </div>
 
             <div className = "container">
               <div className="form-group">
-                <label>
+                <div>
+                <label className = "label">
                   License
+                </label>
                   <select name ="license" value={this.state.license} onChange={this.onChange}>
                     <option value="mit">MIT</option>
                     <option value="isc">ISC</option>
                     <option value="apache-2.0">Apache</option>
                     <option value="gpl">GPL</option>
                   </select>
-                </label>
+
+                </div>
               </div>
-              <div className="form-check">
-                <label>
-                  Include Forked
+              <div className="form-group">
+                <label id ="checkbox">
                   <input
                     name="incForked"
                     type="checkbox"
                     value={this.state.incForked}
                     onChange={this.onChange}
                   />
+                Include Forked
                 </label>
               </div>
             </div>
