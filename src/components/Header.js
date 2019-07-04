@@ -12,7 +12,7 @@ class Header extends Component{
   render(){
     return (
        <div id= 'header' className = 'Banner' >
-       <a href='https://evenfinancial.com'><img src={logo}  alt="Logo"/></a>
+       <a href='https://evenfinancial.com'><img src={logo}  id ="logo" alt="Logo"/></a>
        </div>
     );
   }

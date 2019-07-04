@@ -1,12 +1,57 @@
 /* inspired by: https://css-tricks.com/responsive-data-tables/ */
+
+:root {
+    --line-color: grey;
+}
+
 .responsiveTable {
-  width: 100%;
+  width: 95%;
+  border: 1px solid var(--line-color) !important; /* red */
+  margin:20px;
+  padding:100px !important;
+  font-size: 17px;
+}
+
+/* Table Style */
+.responsiveTable table,
+.responsiveTable thead,
+.responsiveTable tbody,
+.responsiveTable th,
+.responsiveTable td,
+.responsiveTable tr {
+  font-weight: normal;
+
+}
+
+.responsiveTable th, td {
+border-left: 1px solid var(--line-color) !important;
+padding:10px;
+
+
+}
+
+
+
+
+/*Stars and License*/
+.responsiveTable td:nth-child(2), td:nth-child(3) {
+  font-weight: bold;
+
+}
+
+/* Stars and License Columns */
+th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) {
+  text-align: center;
+  width:150px;
+  font-size:15px;
+
 }
 
 .responsiveTable td .tdBefore {
   display: none;
 }
 
+/* Row Style */
 @media screen and (max-width: 40em) {
   /*
     Force table elements to not behave like tables anymore
@@ -19,19 +64,25 @@
   .responsiveTable th,
   .responsiveTable td,
   .responsiveTable tr {
+    /*border: 2px solid #39D1B4; /* blue */
     display: block;
+    width:auto;
+
   }
 
   .responsiveTable thead tr {
     position: absolute;
     top: -9999px;
     left: -9999px;
-    border-bottom: 2px solid #333;
+    /*border-bottom: 1px solid red !important;*/
   }
 
+
+
   .responsiveTable tbody tr {
-    border: 1px solid #000;
+    /*border: 1px solid #000;*/
     padding: .25em;
+
   }
 
   .responsiveTable td.pivoted {
@@ -42,7 +93,14 @@
     text-align: left !important;
     white-space: pre-wrap;
     overflow-wrap: break-word;
+
+    /*border: 2px solid #DD4B39 !important;*/
+    /*border: 2px solid #DD4B39 !important;*/
+
   }
+
+
+
 
   .responsiveTable td .tdBefore {
     /* Now like a table header */
@@ -55,11 +113,25 @@
     white-space: pre-wrap;
     overflow-wrap: break-word;
     text-align: left !important;
-    font-weight: 600;
+    /*font-weight: 600;*/
+    font-weight:normal;
+    /*font-weight: bold;*/
+
+
+
   }
 
   .responsiveTable td:first-child{
-   border: 1px solid #00a65a !important;  /*Green*/
+  /* border: 1px solid #DD4B39 !important; */ /*Green*/
    padding-left: calc(10% + 10px) !important;
+
+
  }
+
+
+   .responsiveTable  td:nth-child(2){
+     border-top: 1px solid var(--line-color) !important;
+     border-bottom: 1px solid var(--line-color) !important;
+   }
+
 }

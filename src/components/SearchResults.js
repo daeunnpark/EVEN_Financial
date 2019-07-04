@@ -18,7 +18,7 @@ render(){
       { this.props.list.map((repo) =>(
       <Repo key = {repo.id} name = {repo.full_name} ownerName = {repo.owner.login}
         url = {repo.html_url} desc = {repo.description} numStars = {repo.stargazers_count}
-        license = {repo.license.name} isforked = {repo.fork}></Repo>))
+        license = {repo.license.name} isforked = {repo.archived}></Repo>))
       }
 
    </React.Fragment>

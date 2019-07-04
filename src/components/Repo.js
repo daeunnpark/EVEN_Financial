@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table"
 import PropTypes from 'prop-types';
 import '../table.css';
+import '../App.css';
 
 
 /**
@@ -34,7 +35,13 @@ class Repo extends Component{
               </Thead>
               <Tbody>
                 <Tr>
-                  <Td className = "he" ><div><a href={this.props.url}>{this.props.name}</a> forked</div><div>{this.props.desc}</div></Td>
+                  <Td className = "he" >
+
+
+                    <div>
+                      <a href={this.props.url} style={{color: '#3E87C6'}} >{this.props.name}{this.props.isforked }</a>
+                    <div></div>
+                    <div>{this.props.desc}{this.props.isforked }</div></div> </Td>
                   <Td className = "he">{this.props.numStars}</Td>
                   <Td className = "he">{this.props.license}</Td>
                 </Tr>

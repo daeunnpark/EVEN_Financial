@@ -72,22 +72,24 @@ class SearchEngine extends Component{
 
   }
 
-  render(){ 
+  render(){
     return  <div className = "searchEngine">
 
               <h3>Even Financial GitHub Repository Search</h3>
 
               <form onSubmit={this.onSubmit}>
                 <div>
+
                   {/* inputsContainer*/}
                   <div className = "inputsContainer">
 
                     <div className = "container">
-                      <div className="form-group">
+                      <div id = "div1" className="form-group">
                         <label className = "label">
                           Text
                         </label>
                         <input
+                          className = "inputClass"
                           type="text"
                           name = "text"
                           value={this.state.text}
@@ -95,11 +97,12 @@ class SearchEngine extends Component{
                           required
                           />
                       </div>
-                      <div className="form-group">
+                      <div id = "div2" className="form-group">
                         <label className = "label">
                           Stars
                         </label>
                         <input
+                          className = "inputClass"
                           type="text"
                           name = "stars"
                           value={this.state.stars}
@@ -109,14 +112,14 @@ class SearchEngine extends Component{
                           />
                       </div>
                     </div>
-
+                    <br/>
                     <div className = "container">
-                      <div className="form-group">
+                      <div id = "div3" className="form-group">
                         <div>
                           <label className = "label">
                             License
                           </label>
-                          <select name ="license" value={this.state.license} onChange={this.onChange}>
+                          <select className = "inputClass"name ="license" value={this.state.license} onChange={this.onChange}>
                             <option value="mit">MIT</option>
                             <option value="isc">ISC</option>
                             <option value="apache-2.0">Apache</option>
@@ -125,7 +128,7 @@ class SearchEngine extends Component{
 
                         </div>
                       </div>
-                      <div className="form-group">
+                      <div  id = "div4"className="form-group22">
                         <label id ="checkbox">
                           <input
                             name="incForked"

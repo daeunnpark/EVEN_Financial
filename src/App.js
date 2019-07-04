@@ -49,6 +49,7 @@ class App extends Component{
 
   render(){
     return (
+            <div className="App">
               <Loader show={this.state.loading} message={'loading'}>
                 <Header/>
                   <SearchEngine setResult = {this.setResult} setLoading = {this.setLoading}/>
@@ -56,6 +57,8 @@ class App extends Component{
 
                 <Footer/>
               </Loader>
+            </div>
+
       );
   }
 }
