@@ -11,12 +11,14 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 import Loader from 'react-loader-advanced';
-
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 /**
  * Main UI
  * @extends Component
  */
+
+//<Route path = '/' component = {SearchEngine}/>
 class App extends Component{
 
   state = {
@@ -45,20 +47,28 @@ class App extends Component{
       msg : new_msg,
       search_results : list
     });
+
+  
   }
 
   render(){
     return (
+      <Router>
             <div className="App">
               <Loader show={this.state.loading} message={'loading'}>
                 <Header/>
-                  <SearchEngine setResult = {this.setResult} setLoading = {this.setLoading}/>
+                {/*<Route path = '/' component = {SearchEngine}/>*/}
+
+                  <Route path='/' render={(props) => <SearchEngine {...props}
+                    setResult = {this.setResult} setLoading = {this.setLoading} />}/>
+
+                  {/*<SearchEngine setResult = {this.setResult} setLoading = {this.setLoading}/>*/}
                   <SearchResults list={this.state.search_results} msg = {this.state.msg}/>
 
                 <Footer/>
               </Loader>
             </div>
-
+  </Router>
       );
   }
 }

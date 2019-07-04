@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios'
 import '../App.css';
+import queryString from 'query-string'
 
 
 /**
@@ -18,6 +19,62 @@ class SearchEngine extends Component{
     incForked: false,
 
   }
+
+  componentDidMount(props) {
+
+    console.log("herereee22222");
+      console.log(this.props.location);
+    console.log(this.props.location.search);
+    var arr = this.props.location.search.split('+');
+    console.log(arr);
+
+    console.log(arr.length);
+      // Query is present in URL
+      if(arr.length===4){
+        console.log("herereee33333");
+          // Parse each param
+          var temp_text = arr[0];
+          var temp_stars = arr[1];
+          var temp_license = arr[2];
+          var tmp_fork = arr[3];
+
+          arr[0] = temp_text.substring(1);
+          arr[1] = decodeURI(temp_stars.substring(6));
+          arr[2] = temp_license.substring(8);
+          arr[3] = tmp_fork.includes("true") ? true : false; // boolean type
+
+          // Update user inputs
+          this.setState({
+            text: arr[0],
+            stars: arr[1],
+            license:arr[2],
+            incForked: arr[3]
+          });
+
+
+          const APIurl = "https://api.github.com/search/repositories";
+
+
+          // Read https://developer.github.com/v3/search/#constructing-a-search-query for details about search query
+          // q = SEARCH_KEYWORD+stars:N+license:LICENSENAME+fork:BOOLEAN
+
+          // Make HTTP GET Request
+          axios.get( APIurl , {
+           params: {
+             q: `${this.state.text} stars:${this.state.stars} license:${this.state.license} fork:${this.state.incForked}`
+           }
+          })
+          .then(res =>{                         // Success
+                 console.log(res.data.items);                //DELETE
+                 this.props.setResult(res.data.items) })
+          .catch(function (error) {                           // Error
+           console.log(error);
+          });
+
+        }
+        console.log("herereee444444");
+    }
+
 
   /**
    * Updates state according to user inputs
@@ -51,24 +108,23 @@ class SearchEngine extends Component{
     // Show loading page while HTTP request
     this.props.setLoading(true);
 
-    const APIurl = "https://api.github.com/search/repositories";
+    console.log("onsubmit");
 
+      //console.log(`?${this.state.text}+stars:${this.state.stars}+license:${this.state.license}+fork:${this.state.incForked}`);
+      //this.props.history.push(`?${this.state.text}+stars:${this.state.stars}+license:${this.state.license}+fork:${this.state.incForked}`);
+var query = `?${this.state.text}+stars:${this.state.stars}+license:${this.state.license}+fork:${this.state.incForked}`;
 
-    // Read https://developer.github.com/v3/search/#constructing-a-search-query for details about search query
-    // q = SEARCH_KEYWORD+stars:N+license:LICENSENAME+fork:BOOLEAN
-
-    // Make HTTP GET Request
-    axios.get( APIurl , {
-      params: {
-        q: `${this.state.text} stars:${this.state.stars} license:${this.state.license} fork:${this.state.incForked}`
-      }
+console.log(query);
+      this.props.history.push({
+  search:query
     })
-    .then(res =>{                         // Success
-            console.log(res.data.items);                //DELETE
-            this.props.setResult(res.data.items) })
-    .catch(function (error) {                           // Error
-      console.log(error);
-    });
+
+
+      //this.componentDidMount(this.props);
+      console.log("herereee11111");
+      console.log(this.props.location);
+      console.log(this.props.location.search);
+      console.log(this.props.location.state);
 
   }
 
