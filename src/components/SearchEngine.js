@@ -27,10 +27,8 @@ class SearchEngine extends Component{
    */
   componentDidMount() {
 
-    console.log("thisthis" + this.props.location.search);
-
     var arr = this.props.location.search.split('+');
-    console.log(arr.length);
+
       // Query is present in URL
       if(arr.length===4){
 
