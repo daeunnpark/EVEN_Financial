@@ -12,22 +12,6 @@ import '../App.css';
  * @extends Component
  */
 class Repo extends Component{
-  constructor(props){
-    super(props);
-    /* props contain:
-
-    - Repo name
-    - Repo owner's name
-    - URL to the repo
-    - Description
-    - Number of stars
-    - License
-    - isforked
-
-    */
-
-  }
-
 
   render(){
     return(
@@ -35,20 +19,22 @@ class Repo extends Component{
             <Table>
               <Thead>
                 <Tr>
-                  <Th className = "he" ></Th>
-                  <Th className = "he" >Stars:</Th>
-                  <Th className = "he" >License:</Th>
+                  <Th></Th>
+                  <Th>Stars:</Th>
+                  <Th>License:</Th>
                 </Tr>
               </Thead>
               <Tbody>
                 <Tr>
-                  <Td className = "he" >
+                  <Td>
                     <div>
-                      <a href={this.props.url} style={{color: '#3E87C6'}} >{this.props.name}{this.props.isforked }</a>
-                    <div></div>
-                    <div>{this.props.desc}{this.props.isforked }</div></div> </Td>
-                  <Td className = "he">{this.props.numStars}</Td>
-                  <Td className = "he">{this.props.license}</Td>
+                      <a href={this.props.url} style={{color: '#3E87C6'}} >{this.props.name}{this.props.isforked}</a>
+                      <div style= {{backgroundColor: '#3E87C6', color: '#fff'}}>{this.props.isforked&& 'Forked'}</div>
+                      <div>{this.props.desc}</div>
+                    </div>
+                  </Td>
+                  <Td>{this.props.numStars}</Td>
+                  <Td>{this.props.license}</Td>
                 </Tr>
               </Tbody>
             </Table>

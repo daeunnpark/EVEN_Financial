@@ -20,13 +20,16 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 //<Route path = '/' component = {SearchEngine}/>
 class App extends Component{
+  constructor(props){
+    super(props);
 
-  state = {
-    loading : false,
-    msg: App.DEFAULT,
-    search_results: [],
+    this.state = {
+      loading : false,
+      msg: App.DEFAULT,
+      search_results: [],
+    }
+
   }
-
   /**
    * Sets loading(state)
    * @param {Boolean} bool Value to assign
@@ -48,7 +51,7 @@ class App extends Component{
       search_results : list
     });
 
-  
+
   }
 
   render(){

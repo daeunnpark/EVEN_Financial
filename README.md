@@ -1,69 +1,34 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Github Repository Search
 
-## Available Scripts
+git-repo-search is built using Reactjs with the following endpoint: https://developer.github.com/v3/search/#search-repositories.
 
-In the project directory, you can run:
+# How to Run
+After cloning or downloading the repository,  type  `npm start` in the root of the repository.
+Deployed version is avaliable [here](https://master.ddk5dc1u1akz7.amplifyapp.com/)
 
-### `npm start`
+## User Inputs
+User input checking is as follows:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Text (SEARCH_KEYWORD in query string) - Non empty string
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Stars (N  in query string)
+Allowed formats are:
+number
+>= number
+<= number
+>number
+<number
 
-### `npm test`
+License - By default MIT (LICENSENAME in query string)
+NB: MIT, ISC, Apache (apache-2.0) and GPL (GNU General Public License family)
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Fork - By default unchecked (BOOLEAN in query string)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Query String
+Accepted query string is in the following format: 
+q = SEARCH_KEYWORD+stars:N+license:LICENSENAME+fork:BOOLEAN
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Accepted examples: base_url/?even+stars:>=100+license:mit+fork:true
+                                    base_url/?financial+stars:<50+license:isc+fork:true
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-# EVEN_Financial

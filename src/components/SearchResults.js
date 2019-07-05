@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 import Repo from './Repo'
 import '../App.css';
 
@@ -9,22 +9,27 @@ import '../App.css';
  */
 class SearchResults extends Component{
 
-render(){
-  return(
-    <React.Fragment>
+  render(){
+    return(
+      <React.Fragment>
 
-      <div className = 'searchMsg'>{this.props.msg}</div>
+        <div className = 'searchMsg'>{this.props.msg}</div>
 
-      { this.props.list.map((repo) =>(
-      <Repo key = {repo.id} name = {repo.full_name} ownerName = {repo.owner.login}
-        url = {repo.html_url} desc = {repo.description} numStars = {repo.stargazers_count}
-        license = {repo.license.name} isforked = {repo.archived}></Repo>))
-      }
+        { this.props.list.map((repo) =>(
+            <Repo key = {repo.id} name = {repo.full_name} ownerName = {repo.owner.login}
+              url = {repo.html_url} desc = {repo.description} numStars = {repo.stargazers_count}
+              license = {repo.license.name} isforked = {repo.fork}></Repo> ))
+        }
 
-   </React.Fragment>
-   );
- }
+     </React.Fragment>
+     );
+   }
 
 }
+
+SearchResults.propTypes = {
+  list : PropTypes.array
+}
+
 
 export default SearchResults;

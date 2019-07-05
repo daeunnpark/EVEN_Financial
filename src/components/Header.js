@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-
 import logo from '../logo_resized.png'
-
+import '../App.css';
 
 /**
  * Header component with logo

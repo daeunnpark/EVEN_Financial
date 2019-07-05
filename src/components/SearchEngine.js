@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-
 import PropTypes from 'prop-types';
 import axios from 'axios'
 import '../App.css';
-import queryString from 'query-string'
+
 
 
 /**
@@ -20,11 +19,11 @@ class SearchEngine extends Component{
       stars: '',
       license: 'mit',
       incForked: false,
-    }
+    };
   }
 
   /**
-   * Parses URL and update Search Engine and Search Results
+   * Parses URL and updates SearchEngine and SearchResults
    */
   componentDidMount() {
 
@@ -119,15 +118,14 @@ class SearchEngine extends Component{
 
     var query = `?${this.state.text}+stars:${this.state.stars}+license:${this.state.license}+fork:${this.state.incForked}`;
 
-
+    // Update URL
     this.props.history.push({
       search: query
     })
 
-
-      console.log("herereee11111");
-      window.location.reload();
-      this.componentDidMount();
+    // Reload the page
+    window.location.reload();
+    this.componentDidMount();
 
   }
 
