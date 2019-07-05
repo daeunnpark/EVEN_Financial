@@ -14,11 +14,11 @@ Text (`SEARCH_KEYWORD` in query string)
 
 Stars (`N`  in query string)
 Allowed formats are:   
-number  
->= number  
-<= number  
->number   
-<number  
+- number  
+- \>= number  
+- <= number  
+- \>number   
+- <number  
 
 License - By default MIT (`LICENSENAME` in query string)
 - MIT
