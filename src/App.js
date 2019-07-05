@@ -30,6 +30,9 @@ class App extends Component{
     }
 
   }
+  componentDidMount(){
+    document.title = "Git Repo Search"
+  }
   /**
    * Sets loading(state)
    * @param {Boolean} bool Value to assign
