@@ -12,7 +12,7 @@ User input checking is as follows:
 Text (`SEARCH_KEYWORD` in query string)
 - Non empty string
 
-Stars (`N`  in query string)
+Stars (`N`  in query string)  
 Allowed formats are:   
 - number  
 - \>= number  
