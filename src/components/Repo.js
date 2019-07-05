@@ -12,15 +12,22 @@ import '../App.css';
  * @extends Component
  */
 class Repo extends Component{
-/* props contain:
-- Repo name
-- Repo owner's name
-- URL to the repo
-- Description
-- Number of stars
-- License
-- isforked
-*/
+  constructor(props){
+    super(props);
+    /* props contain:
+
+    - Repo name
+    - Repo owner's name
+    - URL to the repo
+    - Description
+    - Number of stars
+    - License
+    - isforked
+
+    */
+
+  }
+
 
   render(){
     return(
@@ -36,8 +43,6 @@ class Repo extends Component{
               <Tbody>
                 <Tr>
                   <Td className = "he" >
-
-
                     <div>
                       <a href={this.props.url} style={{color: '#3E87C6'}} >{this.props.name}{this.props.isforked }</a>
                     <div></div>

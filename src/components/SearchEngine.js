@@ -11,27 +11,28 @@ import queryString from 'query-string'
  * @extends Component
  */
 class SearchEngine extends Component{
+  constructor(props){
+    super(props);
 
-  state = {
-    text: '',
-    stars: '',
-    license: 'mit', // Default value
-    incForked: false,
-
+    // Default values
+    this.state = {
+      text: '',
+      stars: '',
+      license: 'mit',
+      incForked: false,
+    }
   }
 
-  componentDidMount(props) {
+  /**
+   * Parses URL and update Search Engine and Search Results
+   */
+  componentDidMount() {
 
-    console.log("herereee22222");
-      console.log(this.props.location);
-    console.log(this.props.location.search);
     var arr = this.props.location.search.split('+');
-    console.log(arr);
 
-    console.log(arr.length);
       // Query is present in URL
       if(arr.length===4){
-        console.log("herereee33333");
+
           // Parse each param
           var temp_text = arr[0];
           var temp_stars = arr[1];
@@ -41,9 +42,9 @@ class SearchEngine extends Component{
           arr[0] = temp_text.substring(1);
           arr[1] = decodeURI(temp_stars.substring(6));
           arr[2] = temp_license.substring(8);
-          arr[3] = tmp_fork.includes("true") ? true : false; // boolean type
+          arr[3] = tmp_fork.includes("true") ? true : false; // Boolean type
 
-          // Update user inputs
+          // Update user inputs in UI
           this.setState({
             text: arr[0],
             stars: arr[1],
@@ -55,24 +56,31 @@ class SearchEngine extends Component{
           const APIurl = "https://api.github.com/search/repositories";
 
 
-          // Read https://developer.github.com/v3/search/#constructing-a-search-query for details about search query
+          // Read https://developer.github.com/v3/search/#constructing-a-search-query for details
           // q = SEARCH_KEYWORD+stars:N+license:LICENSENAME+fork:BOOLEAN
+
+          var query = `${arr[0]} stars:${arr[1]} license:${arr[2]} fork:${arr[3]}`;
 
           // Make HTTP GET Request
           axios.get( APIurl , {
            params: {
-             q: `${this.state.text} stars:${this.state.stars} license:${this.state.license} fork:${this.state.incForked}`
+             q: query
            }
           })
-          .then(res =>{                         // Success
-                 console.log(res.data.items);                //DELETE
+          .then(res =>{                                         // Success
+                 //console.log(res.data.items);
                  this.props.setResult(res.data.items) })
-          .catch(function (error) {                           // Error
-           console.log(error);
+          .catch(function (error) {                             // Error
+           //console.log(error);
+           alert("Something went wrong. Please try again.");
           });
 
+        } else { // Missing params in query
+            if( arr.length >1){
+              alert("Please check your query.");
+            }
         }
-        console.log("herereee444444");
+
     }
 
 
@@ -94,6 +102,7 @@ class SearchEngine extends Component{
       [name]: value
     });
 
+
   }
 
 
@@ -108,23 +117,17 @@ class SearchEngine extends Component{
     // Show loading page while HTTP request
     this.props.setLoading(true);
 
-    console.log("onsubmit");
+    var query = `?${this.state.text}+stars:${this.state.stars}+license:${this.state.license}+fork:${this.state.incForked}`;
 
-      //console.log(`?${this.state.text}+stars:${this.state.stars}+license:${this.state.license}+fork:${this.state.incForked}`);
-      //this.props.history.push(`?${this.state.text}+stars:${this.state.stars}+license:${this.state.license}+fork:${this.state.incForked}`);
-var query = `?${this.state.text}+stars:${this.state.stars}+license:${this.state.license}+fork:${this.state.incForked}`;
 
-console.log(query);
-      this.props.history.push({
-  search:query
+    this.props.history.push({
+      search: query
     })
 
 
-      //this.componentDidMount(this.props);
       console.log("herereee11111");
-      console.log(this.props.location);
-      console.log(this.props.location.search);
-      console.log(this.props.location.state);
+      window.location.reload();
+      this.componentDidMount();
 
   }
 
@@ -189,7 +192,7 @@ console.log(query);
                           <input
                             name="incForked"
                             type="checkbox"
-                            value={this.state.incForked}
+                            defaultChecked={this.state.incForked}
                             onChange={this.onChange}
                             />
                           Include Forked
