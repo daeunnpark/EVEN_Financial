@@ -1,6 +1,6 @@
 # Github Repository Search
 
-git-repo-search is built using Reactjs with the following endpoint: https://developer.github.com/v3/search/#search-repositories.
+ `git-repo-search` is built using ReactJS with the following endpoint: https://developer.github.com/v3/search/#search-repositories.
 
 # How to Run
 After cloning or downloading the repository,  type  `npm start` in the root of the repository.
@@ -9,10 +9,10 @@ Deployed version is avaliable [here](https://master.ddk5dc1u1akz7.amplifyapp.com
 ## User Inputs
 User input checking is as follows:
 
-Text (`SEARCH_KEYWORD` in query string)
+### Text (`SEARCH_KEYWORD` in query string)
 - Non empty string
 
-Stars (`N`  in query string)  
+### Stars (`N`  in query string)  
 Allowed formats are:   
 - number  
 - \>= number  
@@ -20,13 +20,13 @@ Allowed formats are:
 - \>number   
 - <number  
 
-License - By default MIT (`LICENSENAME` in query string)
+### License - By default MIT (`LICENSENAME` in query string)
 - MIT
 - ISC
 - Apache (apache-2.0) 
 - GPL (GNU General Public License family)
 
-Fork - By default unchecked (`BOOLEAN` in query string)
+### Fork - By default unchecked (`BOOLEAN` in query string)
 
 
 ## Query String
@@ -36,4 +36,11 @@ q = `SEARCH_KEYWORD+stars:N+license:LICENSENAME+fork:BOOLEAN`
 Accepted examples: 
 - `base_url/?even+stars:>=100+license:mit+fork:true`
 - `base_url/?financial+stars:<50+license:isc+fork:true`
+
+# Libraries/Frameworks
+The following libraries/frameworks were used:
+- Bootstrap (for input fields, button layout)
+- axios (for HTTP request)
+- react-super-responsive-table (for layout change between table and row)
+
 

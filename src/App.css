@@ -2,25 +2,15 @@
     --main-color:#3E87C6;
 }
 
-
-.App {
-  /*text-align: center;*/
-  margin:auto;
-}
-
-a {
-  font-weight: bolder;
-}
-
 #logo{
-  padding-right: 500px;
+  padding-right: 60vw;
 }
 
-#footer, #header {
+#header, #footer {
   background-color: var(--main-color);
   color:white;
   height: 70px;
-  /*text-align:center;*/
+  text-align:center;
 }
 
 #header{
@@ -30,47 +20,101 @@ a {
 #footer{
   margin-top: 20px;
   padding: 20px 0px;
-  /*text-align:center;*/
 }
-
-
 
 .searchEngine, .searchMsg  {
-  padding: 50px;
-  /*text-align:center;*/
+  padding: 40px;
+  text-align:center;
 }
 
-.inputClass, .label {
-  display:block;
-}
-
-.label{
-  font-size: 15px;
-  margin-bottom: 1px;
-}
-
-#div1, #div3{
-/*float:left;*/
-margin-right:20px;
-
-}
-#div2, #div4{
-/*float:left;*/
-}
-
-br{
-  clear:both;
-}
-
-
-
+/*All inputs Container*/
 .inputsContainer {
   margin: 50px;
+  padding-left:60px;
+  /*position:relative;*/
+
+
+}
+
+/* Input field + Label */
+.container{
+  /*text-align:center;*/
+  /*margin-right: auto;*/
 }
 
 
+.container:after{
+    content: " ";
+    display: block;
+    clear: both;
+}
+
+
+
+/*Input fields - 1st column*/
+#div1, #div3{
+  /*float:left;*/
+  display: inline-block;
+  margin-right: 50px;
+
+}
+
+/*Input fields - 2nd column*/
+#div2, #div4{
+  /*float:left;*/
+  margin-right: 50px;
+  display: inline-block;
+}
+
+/* Checkbox */
+#div4{
+  margin-top: 30px;
+  width:300px;
+  text-align: left;
+}
+
+/*Input fields except Checkbox*/
+.inputClass {
+  width: 300px;
+  height:50px;
+}
+
+/* Input fields - Checkbox */
+input[type="checkbox"] {
+    zoom: 2;
+    color:red;
+}
+
+/*Input fields labels except Checkbox */
+.label{
+  float:left;
+  font-size: 14px;
+}
+
+/*Input fields labels - Checkbox*/
+#checkboxLabel {
+  margin-left:20px;
+}
+
+
+/*Submit Button*/
 .btn.btn-primary{
   font-size:15px;
+  background-color: var(--main-color);
   font-weight: bold;
   padding:10px 50px;
+  margin-top:20px;
+  margin-bottom:70px;
+}
+
+/* Url link */
+a {
+  font-weight: bolder;
+}
+
+/*Divider*/
+hr{
+  color: grey;
+  background-color: grey;
+  height: 5;
 }

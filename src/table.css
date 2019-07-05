@@ -3,9 +3,10 @@
 :root {
     --line-color: grey;
 }
-
+/* Search Results*/
 .responsiveTable {
-  width: 95%;
+  width: 95vw;
+
   border: 1px solid var(--line-color) !important; /* red */
   margin:20px;
   padding:100px !important;
@@ -20,23 +21,11 @@
 .responsiveTable td,
 .responsiveTable tr {
   font-weight: normal;
-
 }
 
 .responsiveTable th, td {
-border-left: 1px solid var(--line-color) !important;
-padding:10px;
-
-
-}
-
-
-
-
-/*Stars and License*/
-.responsiveTable td:nth-child(2), td:nth-child(3) {
-  font-weight: bold;
-
+  border-left: 1px solid var(--line-color) !important;
+  padding:10px;
 }
 
 /* Stars and License Columns */
@@ -44,7 +33,11 @@ th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) {
   text-align: center;
   width:150px;
   font-size:15px;
+}
 
+/* Stars and License - Results */
+.responsiveTable td:nth-child(2), td:nth-child(3) {
+  font-weight: bold;
 }
 
 .responsiveTable td .tdBefore {
@@ -53,20 +46,14 @@ th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) {
 
 /* Row Style */
 @media screen and (max-width: 40em) {
-  /*
-    Force table elements to not behave like tables anymore
-    Hide table headers (but not display: none;, for accessibility)
-  */
-
   .responsiveTable table,
   .responsiveTable thead,
   .responsiveTable tbody,
   .responsiveTable th,
   .responsiveTable td,
   .responsiveTable tr {
-    /*border: 2px solid #39D1B4; /* blue */
     display: block;
-    width:auto;
+    width:95vw;
 
   }
 
@@ -74,33 +61,21 @@ th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) {
     position: absolute;
     top: -9999px;
     left: -9999px;
-    /*border-bottom: 1px solid red !important;*/
   }
 
-
-
   .responsiveTable tbody tr {
-    /*border: 1px solid #000;*/
     padding: .25em;
-
   }
 
   .responsiveTable td.pivoted {
-    /* Behave like a "row" */
     border: none !important;
     position: relative;
     padding-left: calc(20% + 10px) !important;
     text-align: left !important;
     white-space: pre-wrap;
     overflow-wrap: break-word;
-
-    /*border: 2px solid #DD4B39 !important;*/
-    /*border: 2px solid #DD4B39 !important;*/
-
+    margin-right:50px;
   }
-
-
-
 
   .responsiveTable td .tdBefore {
     /* Now like a table header */
@@ -117,17 +92,12 @@ th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) {
     font-weight:normal;
     /*font-weight: bold;*/
 
-
-
   }
 
   .responsiveTable td:first-child{
-  /* border: 1px solid #DD4B39 !important; */ /*Green*/
    padding-left: calc(10% + 10px) !important;
 
-
  }
-
 
    .responsiveTable  td:nth-child(2){
      border-top: 1px solid var(--line-color) !important;

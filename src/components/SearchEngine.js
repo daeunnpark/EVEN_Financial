@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios'
 import '../App.css';
+
 
 
 
@@ -27,8 +27,10 @@ class SearchEngine extends Component{
    */
   componentDidMount() {
 
-    var arr = this.props.location.search.split('+');
+    console.log("thisthis" + this.props.location.search);
 
+    var arr = this.props.location.search.split('+');
+    console.log(arr.length);
       // Query is present in URL
       if(arr.length===4){
 
@@ -75,9 +77,11 @@ class SearchEngine extends Component{
           });
 
         } else { // Missing params in query
-            if( arr.length >1){
-              alert("Please check your query.");
-            }
+
+          if( this.props.location.search !=='' ||arr.length >1){
+            alert("Please check your query.");
+          }
+
         }
 
     }
@@ -144,7 +148,7 @@ class SearchEngine extends Component{
                       <div id = "div1" className="form-group">
                         <label className = "label">
                           Text
-                        </label>
+                        </label><br/>
                         <input
                           className = "inputClass"
                           type="text"
@@ -157,7 +161,7 @@ class SearchEngine extends Component{
                       <div id = "div2" className="form-group">
                         <label className = "label">
                           Stars
-                        </label>
+                        </label><br/>
                         <input
                           className = "inputClass"
                           type="text"
@@ -170,41 +174,44 @@ class SearchEngine extends Component{
                       </div>
                     </div>
                     <br/>
-                    <div className = "container">
+                    <div className = "container" id = "container2">
                       <div id = "div3" className="form-group">
                         <div>
                           <label className = "label">
                             License
-                          </label>
+                          </label><br/>
                           <select className = "inputClass"name ="license" value={this.state.license} onChange={this.onChange}>
                             <option value="mit">MIT</option>
                             <option value="isc">ISC</option>
                             <option value="apache-2.0">Apache</option>
                             <option value="gpl">GPL</option>
                           </select>
-
                         </div>
                       </div>
-                      <div  id = "div4"className="form-group22">
-                        <label id ="checkbox">
+                      <div  id = "div4"className="form-group">
                           <input
+                            id = "checkbox"
                             name="incForked"
                             type="checkbox"
                             defaultChecked={this.state.incForked}
                             onChange={this.onChange}
                             />
+                          <label id ="checkboxLabel">
                           Include Forked
-                        </label>
+                          </label><br/>
                       </div>
                     </div>
 
                   </div>
                   {/* inputsContainer */}
 
+
+
                   <button type="submit" className="btn btn-primary">SEARCH</button>
 
                 </div>
               </form>
+              <hr />
             </div>
 
     }
