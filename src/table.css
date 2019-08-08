@@ -1,15 +1,15 @@
 /* inspired by: https://css-tricks.com/responsive-data-tables/ */
-
 :root {
-    --line-color: grey;
+  --line-color: grey;
 }
+
 /* Search Results*/
 .responsiveTable {
   width: 95vw;
-
-  border: 1px solid var(--line-color) !important; /* red */
-  margin:20px;
-  padding:100px !important;
+  border: 1px solid var(--line-color) !important;
+  /* red */
+  margin: 20px;
+  padding: 100px !important;
   font-size: 17px;
 }
 
@@ -25,14 +25,14 @@
 
 .responsiveTable th, td {
   border-left: 1px solid var(--line-color) !important;
-  padding:10px;
+  padding: 10px;
 }
 
 /* Stars and License Columns */
 th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) {
   text-align: center;
-  width:150px;
-  font-size:15px;
+  width: 150px;
+  font-size: 15px;
 }
 
 /* Stars and License - Results */
@@ -46,6 +46,7 @@ th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) {
 
 /* Row Style */
 @media screen and (max-width: 40em) {
+
   .responsiveTable table,
   .responsiveTable thead,
   .responsiveTable tbody,
@@ -53,8 +54,7 @@ th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) {
   .responsiveTable td,
   .responsiveTable tr {
     display: block;
-    width:95vw;
-
+    width: 95vw;
   }
 
   .responsiveTable thead tr {
@@ -74,34 +74,26 @@ th:nth-child(2), td:nth-child(2), th:nth-child(3), td:nth-child(3) {
     text-align: left !important;
     white-space: pre-wrap;
     overflow-wrap: break-word;
-    margin-right:50px;
+    margin-right: 50px;
   }
 
   .responsiveTable td .tdBefore {
-    /* Now like a table header */
     position: absolute;
     display: block;
-
-    /* Top/left values mimic padding */
     left: 1rem;
     width: calc(20% - 15px);
     white-space: pre-wrap;
     overflow-wrap: break-word;
     text-align: left !important;
-    /*font-weight: 600;*/
-    font-weight:normal;
-    /*font-weight: bold;*/
-
+    font-weight: normal;
   }
 
-  .responsiveTable td:first-child{
-   padding-left: calc(10% + 10px) !important;
+  .responsiveTable td:first-child {
+    padding-left: calc(10% + 10px) !important;
+  }
 
- }
-
-   .responsiveTable  td:nth-child(2){
-     border-top: 1px solid var(--line-color) !important;
-     border-bottom: 1px solid var(--line-color) !important;
-   }
-
+  .responsiveTable td:nth-child(2) {
+    border-top: 1px solid var(--line-color) !important;
+    border-bottom: 1px solid var(--line-color) !important;
+  }
 }

@@ -2,10 +2,6 @@
     --main-color:#3E87C6;
 }
 
-#logo{
-  padding-right: 60vw;
-}
-
 #header, #footer {
   background-color: var(--main-color);
   color:white;
@@ -31,17 +27,8 @@
 .inputsContainer {
   margin: 50px;
   padding-left:60px;
-  /*position:relative;*/
-
 
 }
-
-/* Input field + Label */
-.container{
-  /*text-align:center;*/
-  /*margin-right: auto;*/
-}
-
 
 .container:after{
     content: " ";
@@ -49,25 +36,19 @@
     clear: both;
 }
 
-
-
 /*Input fields - 1st column*/
-#div1, #div3{
-  /*float:left;*/
+#inputText, #inputLicense{
   display: inline-block;
   margin-right: 50px;
-
 }
 
 /*Input fields - 2nd column*/
-#div2, #div4{
-  /*float:left;*/
+#inputStars, #inputForked{
   margin-right: 50px;
   display: inline-block;
 }
 
-/* Checkbox */
-#div4{
+#inputForked{
   margin-top: 30px;
   width:300px;
   text-align: left;
@@ -79,7 +60,6 @@
   height:50px;
 }
 
-/* Input fields - Checkbox */
 input[type="checkbox"] {
     zoom: 2;
     color:red;
@@ -95,7 +75,6 @@ input[type="checkbox"] {
 #checkboxLabel {
   margin-left:20px;
 }
-
 
 /*Submit Button*/
 .btn.btn-primary{

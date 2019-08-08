@@ -3,7 +3,7 @@ import axios from 'axios'
 import '../App.css';
 
 
-
+const APIurl = "https://api.github.com/search/repositories";
 
 /**
  * SearchEngine Component with search options represented in state
@@ -12,8 +12,6 @@ import '../App.css';
 class SearchEngine extends Component{
   constructor(props){
     super(props);
-
-    // Default values
     this.state = {
       text: '',
       stars: '',
@@ -29,10 +27,8 @@ class SearchEngine extends Component{
 
     var arr = this.props.location.search.split('+');
 
-      // Query is present in URL
       if(arr.length===4){
 
-          // Parse each param
           var temp_text = arr[0];
           var temp_stars = arr[1];
           var temp_license = arr[2];
@@ -41,9 +37,8 @@ class SearchEngine extends Component{
           arr[0] = temp_text.substring(1);
           arr[1] = decodeURI(temp_stars.substring(6));
           arr[2] = temp_license.substring(8);
-          arr[3] = tmp_fork.includes("true") ? true : false; // Boolean type
+          arr[3] = tmp_fork.includes("true") ? true : false;
 
-          // Update user inputs in UI
           this.setState({
             text: arr[0],
             stars: arr[1],
@@ -51,37 +46,22 @@ class SearchEngine extends Component{
             incForked: arr[3]
           });
 
-
-          const APIurl = "https://api.github.com/search/repositories";
-
-
-          // Read https://developer.github.com/v3/search/#constructing-a-search-query for details
-          // q = SEARCH_KEYWORD+stars:N+license:LICENSENAME+fork:BOOLEAN
-
           var query = `${arr[0]} stars:${arr[1]} license:${arr[2]} fork:${arr[3]}`;
 
-          // Make HTTP GET Request
           axios.get( APIurl , {
            params: {
              q: query
            }
           })
-          .then(res =>{                                         // Success
-                 //console.log(res.data.items);
-                 this.props.setResult(res.data.items) })
-          .catch(function (error) {                             // Error
-           //console.log(error);
+          .then(res =>{ this.props.setResult(res.data.items) })
+          .catch(function (error) {
            alert("Something went wrong. Please try again.");
           });
-
-        } else { // Missing params in query
-
+        } else {
           if( this.props.location.search !=='' ||arr.length >1){
             alert("Please check your query.");
           }
-
         }
-
     }
 
 
@@ -90,20 +70,13 @@ class SearchEngine extends Component{
    * @param  {Event} event Current event
    */
   onChange = (event) => {
-
     event.preventDefault();
-
     const target = event.target;
-
-    // For checkbox type, value is a boolean
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-
     this.setState({
       [name]: value
     });
-
-
   }
 
 
@@ -112,38 +85,24 @@ class SearchEngine extends Component{
    * @param  {Event} event Current event
    */
   onSubmit = (event) => {
-
     event.preventDefault();
-
-    // Show loading page while HTTP request
     this.props.setLoading(true);
-
     var query = `?${this.state.text}+stars:${this.state.stars}+license:${this.state.license}+fork:${this.state.incForked}`;
-
-    // Update URL
     this.props.history.push({
       search: query
     })
-
-    // Reload the page
     window.location.reload();
     this.componentDidMount();
-
   }
 
   render(){
     return  <div className = "searchEngine">
-
-              <h3>Even Financial GitHub Repository Search</h3>
-
+              <h3>GitHub Repository Search</h3>
               <form onSubmit={this.onSubmit}>
                 <div>
-
-                  {/* inputsContainer*/}
                   <div className = "inputsContainer">
-
                     <div className = "container">
-                      <div id = "div1" className="form-group">
+                      <div id = "inputText" className="form-group">
                         <label className = "label">
                           Text
                         </label><br/>
@@ -156,7 +115,7 @@ class SearchEngine extends Component{
                           required
                           />
                       </div>
-                      <div id = "div2" className="form-group">
+                      <div id = "inputStars" className="form-group">
                         <label className = "label">
                           Stars
                         </label><br/>
@@ -173,7 +132,7 @@ class SearchEngine extends Component{
                     </div>
                     <br/>
                     <div className = "container" id = "container2">
-                      <div id = "div3" className="form-group">
+                      <div id = "inputLicense" className="form-group">
                         <div>
                           <label className = "label">
                             License
@@ -186,7 +145,7 @@ class SearchEngine extends Component{
                           </select>
                         </div>
                       </div>
-                      <div  id = "div4"className="form-group">
+                      <div id = "inputForked" className="form-group">
                           <input
                             id = "checkbox"
                             name="incForked"
@@ -199,17 +158,11 @@ class SearchEngine extends Component{
                           </label><br/>
                       </div>
                     </div>
-
                   </div>
-                  {/* inputsContainer */}
-
-
-
                   <button type="submit" className="btn btn-primary">SEARCH</button>
-
                 </div>
               </form>
-              <hr />
+              <hr/>
             </div>
 
     }
