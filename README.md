@@ -49,4 +49,4 @@ The following libraries/frameworks were used:
 ![Search Engine 2 - Desktop](https://user-images.githubusercontent.com/30763506/62888361-1d946600-bd0d-11e9-8a29-c10c6717a9ca.png)
 ![Search Results - Desktop](https://user-images.githubusercontent.com/30763506/62888362-1d946600-bd0d-11e9-8e37-a645ea060035.png)
 ![Search Engine - Mobile](https://user-images.githubusercontent.com/30763506/62888363-1d946600-bd0d-11e9-8bd8-9f25e5aa1397.png)
-![Search Results - Mobile](https://user-images.githubusercontent.com/30763506/62888364-1d946600-bd0d-11e9-99c2-6dc13e3fe332.png)
+![Search Results - Mobile](https://user-images.githubusercontent.com/30763506/62889093-a1028700-bd0e-11e9-9505-9397a4fb66e2.png)
