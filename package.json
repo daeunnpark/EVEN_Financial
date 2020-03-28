@@ -15,7 +15,7 @@
     "react-inputs-validation": "^3.2.2",
     "react-loader-advanced": "^1.7.1",
     "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.0.1",
     "react-spinners": "^0.5.4",
     "react-super-responsive-table": "^5.0.0"

@@ -10,8 +10,10 @@ import SearchResults from './components/SearchResults';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
+import Controller from './controllers/Controller';
+
 import Loader from 'react-loader-advanced';
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 /**
  * Main UI
@@ -57,25 +59,27 @@ class App extends Component{
 
   }
 
+/*
+<Route path='/' render={(props) => <SearchEngine {...props}
+  setResult = {this.setResult} setLoading = {this.setLoading} />}/>
+
+<SearchResults list={this.state.search_results} msg = {this.state.msg}/>
+<Route path='/:query' component ={SearchResults}/>
+ */
   render(){
     return (
       <Router>
             <div className="App">
               <Loader show={this.state.loading} message={'loading'}>
                 <Header/>
-                {/*<Route path = '/' component = {SearchEngine}/>*/}
-
-                  <Route path='/' render={(props) => <SearchEngine {...props}
-                    setResult = {this.setResult} setLoading = {this.setLoading} />}/>
-
-                  {/*<SearchEngine setResult = {this.setResult} setLoading = {this.setLoading}/>*/}
+                  <SearchEngine />
                   <SearchResults list={this.state.search_results} msg = {this.state.msg}/>
-
                 <Footer/>
               </Loader>
             </div>
-  </Router>
-      );
+            <Route path = "/search" render={(props)=> <Controller setResult = {this.setResult}{...props}/>}/>
+      </Router>
+);
   }
 }
 

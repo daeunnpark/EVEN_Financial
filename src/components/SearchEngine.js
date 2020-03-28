@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import '../App.css';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
-const APIurl = "https://api.github.com/search/repositories";
 
 /**
  * SearchEngine Component with search options represented in state
@@ -18,51 +20,8 @@ class SearchEngine extends Component{
       license: 'mit',
       incForked: false,
     };
+    this.onSubmit = this.onSubmit.bind(this);
   }
-
-  /**
-   * Parses URL and updates SearchEngine and SearchResults
-   */
-  componentDidMount() {
-
-    var arr = this.props.location.search.split('+');
-
-      if(arr.length===4){
-
-          var temp_text = arr[0];
-          var temp_stars = arr[1];
-          var temp_license = arr[2];
-          var tmp_fork = arr[3];
-
-          arr[0] = temp_text.substring(1);
-          arr[1] = decodeURI(temp_stars.substring(6));
-          arr[2] = temp_license.substring(8);
-          arr[3] = tmp_fork.includes("true") ? true : false;
-
-          this.setState({
-            text: arr[0],
-            stars: arr[1],
-            license:arr[2],
-            incForked: arr[3]
-          });
-
-          var query = `${arr[0]} stars:${arr[1]} license:${arr[2]} fork:${arr[3]}`;
-
-          axios.get( APIurl , {
-           params: {
-             q: query
-           }
-          })
-          .then(res =>{ this.props.setResult(res.data.items) })
-          .catch(function (error) {
-           alert("Something went wrong. Please try again.");
-          });
-        } else {
-          if( this.props.location.search !=='' ||arr.length >1){
-            alert("Please check your query.");
-          }
-        }
-    }
 
 
   /**
@@ -84,21 +43,23 @@ class SearchEngine extends Component{
    * Makes HTTP GET request to API with user inputs and sets results to the response
    * @param  {Event} event Current event
    */
-  onSubmit = (event) => {
+  onSubmit(event) {
     event.preventDefault();
-    this.props.setLoading(true);
-    var query = `?${this.state.text}+stars:${this.state.stars}+license:${this.state.license}+fork:${this.state.incForked}`;
-    this.props.history.push({
-      search: query
-    })
-    window.location.reload();
-    this.componentDidMount();
+    //this.props.setLoading(true);
+    const params = new URLSearchParams({
+      text: this.state.text,
+      stars: this.state.stars,
+      license: this.state.license,
+      fork: this.state.incForked
+    });
+    this.props.history.push("search?"+ params);
   }
+
 
   render(){
     return  <div className = "searchEngine">
               <h3>GitHub Repository Search</h3>
-              <form onSubmit={this.onSubmit}>
+              <form>
                 <div>
                   <div className = "inputsContainer">
                     <div className = "container">
@@ -159,7 +120,7 @@ class SearchEngine extends Component{
                       </div>
                     </div>
                   </div>
-                  <button type="submit" className="btn btn-primary">SEARCH</button>
+                  <button onClick={this.onSubmit} className="btn btn-primary">SEARCH</button>
                 </div>
               </form>
               <hr/>
@@ -168,5 +129,68 @@ class SearchEngine extends Component{
     }
 }
 
+//export default SearchEngine;
 
-export default SearchEngine;
+export default withRouter(SearchEngine);
+
+
+
+/**
+ * Parses URL and updates SearchEngine and SearchResults
+ */
+/*
+componentDidMount() {
+
+  var arr = this.props.location.search.split('+');
+
+    if(arr.length===4){
+
+        var temp_text = arr[0];
+        var temp_stars = arr[1];
+        var temp_license = arr[2];
+        var tmp_fork = arr[3];
+
+        arr[0] = temp_text.substring(1);
+        arr[1] = decodeURI(temp_stars.substring(6));
+        arr[2] = temp_license.substring(8);
+        arr[3] = tmp_fork.includes("true") ? true : false;
+
+        this.setState({
+          text: arr[0],
+          stars: arr[1],
+          license:arr[2],
+          incForked: arr[3]
+        });
+
+        var query = `${arr[0]} stars:${arr[1]} license:${arr[2]} fork:${arr[3]}`;
+
+        axios.get( APIurl , {
+         params: {
+           q: query
+         }
+        })
+        .then(res =>{ this.props.setResult(res.data.items) })
+        .catch(function (error) {
+         alert("Something went wrong. Please try again.");
+        });
+      } else {
+        if( this.props.location.search !=='' ||arr.length >1){
+          alert("Please check your query.");
+        }
+      }
+  }
+
+*/
+
+/*
+onSubmit = (event) => {
+  event.preventDefault();
+  this.props.setLoading(true);
+  var query = `?${this.state.text}+stars:${this.state.stars}+license:${this.state.license}+fork:${this.state.incForked}`;
+  this.props.history.push({
+    search: query
+  })
+  window.location.reload();
+  this.componentDidMount();
+}
+ */
