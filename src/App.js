@@ -20,7 +20,6 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
  * @extends Component
  */
 
-//<Route path = '/' component = {SearchEngine}/>
 class App extends Component{
   constructor(props){
     super(props);
@@ -35,11 +34,13 @@ class App extends Component{
   componentDidMount(){
     document.title = "Git Repo Search"
   }
+
   /**
    * Sets loading(state)
    * @param {Boolean} bool Value to assign
    */
   setLoading = (bool) =>{
+    console.log("set loading");
     this.setState({loading : bool});
   }
 
@@ -55,8 +56,6 @@ class App extends Component{
       msg : new_msg,
       search_results : list
     });
-
-
   }
 
 /*
@@ -65,6 +64,7 @@ class App extends Component{
 
 <SearchResults list={this.state.search_results} msg = {this.state.msg}/>
 <Route path='/:query' component ={SearchResults}/>
+<Route path = "/search" render={(props)=> <Controller setResult = {this.setResult}{...props}/>}/>
  */
   render(){
     return (
@@ -73,11 +73,11 @@ class App extends Component{
               <Loader show={this.state.loading} message={'loading'}>
                 <Header/>
                   <SearchEngine />
-                  <SearchResults list={this.state.search_results} msg = {this.state.msg}/>
+                  <Route path = "/search" render = {(props) => <SearchResults setLoading = {this.setLoading} {...props}/>}/>
                 <Footer/>
               </Loader>
             </div>
-            <Route path = "/search" render={(props)=> <Controller setResult = {this.setResult}{...props}/>}/>
+
       </Router>
 );
   }

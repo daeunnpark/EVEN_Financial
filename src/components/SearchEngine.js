@@ -129,58 +129,8 @@ class SearchEngine extends Component{
     }
 }
 
-//export default SearchEngine;
-
 export default withRouter(SearchEngine);
 
-
-
-/**
- * Parses URL and updates SearchEngine and SearchResults
- */
-/*
-componentDidMount() {
-
-  var arr = this.props.location.search.split('+');
-
-    if(arr.length===4){
-
-        var temp_text = arr[0];
-        var temp_stars = arr[1];
-        var temp_license = arr[2];
-        var tmp_fork = arr[3];
-
-        arr[0] = temp_text.substring(1);
-        arr[1] = decodeURI(temp_stars.substring(6));
-        arr[2] = temp_license.substring(8);
-        arr[3] = tmp_fork.includes("true") ? true : false;
-
-        this.setState({
-          text: arr[0],
-          stars: arr[1],
-          license:arr[2],
-          incForked: arr[3]
-        });
-
-        var query = `${arr[0]} stars:${arr[1]} license:${arr[2]} fork:${arr[3]}`;
-
-        axios.get( APIurl , {
-         params: {
-           q: query
-         }
-        })
-        .then(res =>{ this.props.setResult(res.data.items) })
-        .catch(function (error) {
-         alert("Something went wrong. Please try again.");
-        });
-      } else {
-        if( this.props.location.search !=='' ||arr.length >1){
-          alert("Please check your query.");
-        }
-      }
-  }
-
-*/
 
 /*
 onSubmit = (event) => {
