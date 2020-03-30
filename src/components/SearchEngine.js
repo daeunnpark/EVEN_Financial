@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import '../App.css';
-import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 
+import '../App.css';
 
-
-/**
- * SearchEngine Component with search options represented in state
- * @extends Component
- */
 class SearchEngine extends Component{
   constructor(props){
     super(props);
@@ -19,15 +11,11 @@ class SearchEngine extends Component{
       stars: '',
       license: 'mit',
       incForked: false,
+      msg:true
     };
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
 
-  /**
-   * Updates state according to user inputs
-   * @param  {Event} event Current event
-   */
   onChange = (event) => {
     event.preventDefault();
     const target = event.target;
@@ -38,14 +26,11 @@ class SearchEngine extends Component{
     });
   }
 
-
-  /**
-   * Makes HTTP GET request to API with user inputs and sets results to the response
-   * @param  {Event} event Current event
-   */
-  onSubmit(event) {
+  onSubmit = (event) => {
     event.preventDefault();
-    //this.props.setLoading(true);
+    this.setState({
+      msg:false
+    });
     const params = new URLSearchParams({
       text: this.state.text,
       stars: this.state.stars,
@@ -55,9 +40,8 @@ class SearchEngine extends Component{
     this.props.history.push("search?"+ params);
   }
 
-
   render(){
-    return  <div className = "searchEngine">
+    return  (<div className = "searchEngine">
               <h3>GitHub Repository Search</h3>
               <form>
                 <div>
@@ -124,23 +108,12 @@ class SearchEngine extends Component{
                 </div>
               </form>
               <hr/>
-            </div>
+              {this.state.msg ? <div className = 'searchMsg'>{SearchEngine.DEFAULT}</div>: (null)}
+            </div>);
 
     }
 }
 
+SearchEngine.DEFAULT = 'Please enter query and click SEARCH button above, results appear here.';
+
 export default withRouter(SearchEngine);
-
-
-/*
-onSubmit = (event) => {
-  event.preventDefault();
-  this.props.setLoading(true);
-  var query = `?${this.state.text}+stars:${this.state.stars}+license:${this.state.license}+fork:${this.state.incForked}`;
-  this.props.history.push({
-    search: query
-  })
-  window.location.reload();
-  this.componentDidMount();
-}
- */

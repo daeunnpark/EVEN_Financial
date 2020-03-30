@@ -4,10 +4,7 @@ import Repo from './Repo'
 import '../App.css';
 import axios from 'axios'
 
-/**
- * SearchResults Component maps SearchResults to Repo Components
- * @extends Component
- */
+
 class SearchResults extends Component{
   constructor(props){
     super(props);
@@ -21,7 +18,7 @@ class SearchResults extends Component{
   }
 
   componentDidUpdate(prevProps){
-    if(this.props.location.search!= prevProps.location.search){
+    if(this.props.location.search!== prevProps.location.search){
       this.search();
     }
   }
@@ -34,7 +31,7 @@ class SearchResults extends Component{
     axios.get("https://api.github.com/search/repositories?q=" + query)
       .then(res => {
         this.setState({
-          search_results : res.data.items
+          search_results:res.data.items
         });
         this.props.setLoading(false);
       })
@@ -46,10 +43,11 @@ class SearchResults extends Component{
 
   }
 
-
   render(){
     return(
       <React.Fragment>
+         <div className = 'searchMsg'>{this.state.search_results.length===0 ?SearchResults.NORESULTS : SearchResults.RESULTS}</div>
+
         {this.state.search_results.map((repo) =>(
             <Repo
               key = {repo.id}
@@ -64,7 +62,7 @@ class SearchResults extends Component{
           ))
         }
      </React.Fragment>
-    );
+   );
   }
 }
 
@@ -72,8 +70,7 @@ SearchResults.propTypes = {
   list : PropTypes.array
 }
 
-/*
-<div className = 'searchMsg'>{this.props.msg}</div>
- */
+SearchResults.RESULTS = 'SEARCH results:';
+SearchResults.NORESULTS = 'No search results found.';
 
 export default SearchResults;
