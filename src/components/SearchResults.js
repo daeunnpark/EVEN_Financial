@@ -39,7 +39,7 @@ class SearchResults extends Component{
         });
         this.props.setLoading(false);
       })
-      .catch(function(error) {
+      .catch(error => {
         console.log(error);
         this.props.setLoading(false);
         alert("Something went wrong. Please try again.");
