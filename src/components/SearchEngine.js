@@ -15,6 +15,25 @@ class SearchEngine extends Component{
     };
   }
 
+  componentDidMount(){
+    const params = new URLSearchParams(this.props.location.search);
+    const queryText = params.get('text');
+    const queryStars = params.get('stars');
+    const queryLicense = params.get('license');
+    const queryFork = params.get('fork');
+
+    if(queryText!=null && queryStars!=null && queryLicense!=null && queryFork!=null){
+      this.setState({
+        text: queryText,
+        stars: queryStars,
+        license: queryLicense,
+        incForked: (queryFork ==="true")
+      });
+  }
+
+
+  }
+
 
   onChange = (event) => {
     event.preventDefault();
@@ -95,7 +114,7 @@ class SearchEngine extends Component{
                             id = "checkbox"
                             name="incForked"
                             type="checkbox"
-                            defaultChecked={this.state.incForked}
+                            checked={this.state.incForked}
                             onChange={this.onChange}
                             />
                           <label id ="checkboxLabel">

@@ -23,6 +23,10 @@ class SearchResults extends Component{
     }
   }
 
+  componentWillUnmount(){
+    console.log("UNMOUNT");
+  }
+
   search = () =>{
     const params = new URLSearchParams(this.props.location.search);
     var query = params.get('text') + "+stars:" + params.get('stars') + "+license:" + params.get('license') + "+fork:" + params.get('fork');
