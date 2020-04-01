@@ -16,6 +16,7 @@ class SearchEngine extends Component{
   }
 
   componentDidMount(){
+
     const params = new URLSearchParams(this.props.location.search);
     const queryText = params.get('text');
     const queryStars = params.get('stars');
@@ -50,12 +51,15 @@ class SearchEngine extends Component{
     this.setState({
       msg:false
     });
+
+
     const params = new URLSearchParams({
       text: this.state.text,
       stars: this.state.stars,
       license: this.state.license,
       fork: this.state.incForked
     });
+    
     this.props.history.push("search?"+ params);
   }
 

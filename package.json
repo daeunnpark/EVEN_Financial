@@ -2,6 +2,7 @@
   "name": "git-repo-search",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://api.github.com/search",
   "dependencies": {
     "@babel/runtime": "^7.4.5",
     "@material-ui/core": "^4.1.3",
