@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import SearchEngine from './components/SearchEngine';
 import SearchResults from './components/SearchResults';
-
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -47,7 +46,7 @@ class App extends Component{
             <div className="App">
               <Loader show={this.state.loading} message={'Loading'}>
                 <Header/>
-                <SearchEngine />
+                  <Route path = "/" component = {SearchEngine}/>
                   <Route path = "/search" render = {(props) => <SearchResults setLoading = {this.setLoading} {...props}/>}/>
                 <Footer/>
               </Loader>

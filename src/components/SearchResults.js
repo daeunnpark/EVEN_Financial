@@ -1,29 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import PropTypes from 'prop-types';
 import Repo from './Repo'
 import '../App.css';
-import axios from 'axios'
+
 
 function SearchResults(props){
-  const [list, setList] = useState([]);
-  const url = "/repositories?q=";
+const [list, setList] = useState([]);
 
-  useEffect(() => {
-    const params = new URLSearchParams(props.location.search);
-    var query = params.get('text') + "+stars:" + params.get('stars') + "+license:" + params.get('license') + "+fork:" + params.get('fork');
-    props.setLoading(true);
+const url = "/repositories?q=";
 
-    axios.get(url+query)
-    .then(res => {
-        setList(res.data.items);
-        props.setLoading(false);
-      })
-      .catch(error => {
-        console.log(error);
-        props.setLoading(false);
-        alert("Something went wrong. Please try again.");
-      });
-  },[props.location.search]);
+useEffect(() => {
+  const params = new URLSearchParams(props.location.search);
+  var query = params.get('text') + "+stars:" + params.get('stars') + "+license:" + params.get('license') + "+fork:" + params.get('incForked');
+  props.setLoading(true);
+
+  axios.get(url+query)
+  .then(res => {
+      setList(res.data.items);
+      props.setLoading(false);
+    })
+    .catch(error => {
+      console.log(error);
+      props.setLoading(false);
+      alert("Something went wrong. Please try again.");
+    });
+},[props.location.search]);
 
 
   return(

@@ -1,70 +1,58 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import queryString from 'query-string'
 import '../App.css';
 
-class SearchEngine extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      text: '',
-      stars: '',
-      license: 'mit',
-      incForked: false,
-      msg:true
-    };
+
+function SearchEngine(){
+  const [msg, setMsg] = useState(true);
+  const [inputs, setInput] = useState({
+    text: '',
+    stars: '',
+    license: 'MIT',
+    incForked: false,
+  });
+
+  const query = queryString.parse(useLocation().search);
+  const params = {
+    text: query.text,
+    stars: query.stars,
+    license: query.license,
+    incForked : (query.incForked==="true")
   }
 
-  componentDidMount(){
-
-    const params = new URLSearchParams(this.props.location.search);
-    const queryText = params.get('text');
-    const queryStars = params.get('stars');
-    const queryLicense = params.get('license');
-    const queryFork = params.get('fork');
-
-    if(queryText!=null && queryStars!=null && queryLicense!=null && queryFork!=null){
-      this.setState({
-        text: queryText,
-        stars: queryStars,
-        license: queryLicense,
-        incForked: (queryFork ==="true")
-      });
-  }
+  useEffect(()=>{
+      if(params.text!=null && params.stars!=null && params.license!=null && params.incForked!=null){
+        setInput(params);
+      }
+  }, [params.text, params.stars, params.license, params.incForked]);
 
 
-  }
-
-
-  onChange = (event) => {
+  function onChange(event){
     event.preventDefault();
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    this.setState({
+    setInput({
+      ...inputs,
       [name]: value
     });
   }
 
-  onSubmit = (event) => {
+  let history = useHistory();
+  function onSubmit(event){
     event.preventDefault();
-    this.setState({
-      msg:false
-    });
-
-
+    setMsg(false);
     const params = new URLSearchParams({
-      text: this.state.text,
-      stars: this.state.stars,
-      license: this.state.license,
-      fork: this.state.incForked
+      text: inputs.text,
+      stars: inputs.stars,
+      license: inputs.license,
+      incForked: inputs.incForked
     });
-    
-    this.props.history.push("search?"+ params);
+    history.push("search?"+ params);
   }
 
-  render(){
-    return  (<div className = "searchEngine">
+    return (<div className = "searchEngine">
               <h3>GitHub Repository Search</h3>
               <form>
                 <div>
@@ -78,8 +66,8 @@ class SearchEngine extends Component{
                           className = "inputClass"
                           type="text"
                           name = "text"
-                          value={this.state.text}
-                          onChange={this.onChange}
+                          value={inputs.text}
+                          onChange={onChange}
                           required
                           />
                       </div>
@@ -91,8 +79,8 @@ class SearchEngine extends Component{
                           className = "inputClass"
                           type="text"
                           name = "stars"
-                          value={this.state.stars}
-                          onChange={this.onChange}
+                          value={inputs.stars}
+                          onChange={onChange}
                           required
                           pattern="(>|<|>=|<=)?[0-9]+"
                           />
@@ -105,7 +93,7 @@ class SearchEngine extends Component{
                           <label className = "label">
                             License
                           </label><br/>
-                          <select className = "inputClass"name ="license" value={this.state.license} onChange={this.onChange}>
+                        <select className = "inputClass"name ="license" value={inputs.license} onChange={onChange}>
                             <option value="mit">MIT</option>
                             <option value="isc">ISC</option>
                             <option value="apache-2.0">Apache</option>
@@ -118,8 +106,8 @@ class SearchEngine extends Component{
                             id = "checkbox"
                             name="incForked"
                             type="checkbox"
-                            checked={this.state.incForked}
-                            onChange={this.onChange}
+                            checked={inputs.incForked}
+                            onChange={onChange}
                             />
                           <label id ="checkboxLabel">
                           Include Forked
@@ -127,16 +115,16 @@ class SearchEngine extends Component{
                       </div>
                     </div>
                   </div>
-                  <button onClick={this.onSubmit} className="btn btn-primary">SEARCH</button>
+                  <button onClick={onSubmit} className="btn btn-primary">SEARCH</button>
                 </div>
               </form>
               <hr/>
-              {this.state.msg ? <div className = 'searchMsg'>{SearchEngine.DEFAULT}</div>: (null)}
-            </div>);
+              {msg ? <div className = 'searchMsg'>{SearchEngine.DEFAULT}</div>: (null)}
+            </div>
+          );
 
-    }
 }
 
 SearchEngine.DEFAULT = 'Please enter query and click SEARCH button above, results appear here.';
 
-export default withRouter(SearchEngine);
+export default SearchEngine;
