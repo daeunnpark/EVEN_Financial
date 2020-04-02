@@ -1,17 +1,9 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table"
 import '../table.css';
 import '../App.css';
 
-
-/**
- * Repo component representing github repository
- * @extends Component
- */
-class Repo extends Component{
-
-  render(){
+const Repo = (props) =>{
     return(
           <div>
             <Table>
@@ -26,18 +18,17 @@ class Repo extends Component{
                 <Tr>
                   <Td>
                     <div>
-                      <a href={this.props.url} style={{color: '#3E87C6'}} >{this.props.name}{this.props.isforked}</a>
-                      <div style= {{backgroundColor: '#3E87C6', color: '#fff'}}>{this.props.isforked&& 'Forked'}</div>
-                      <div>{this.props.desc}</div>
+                      <a href={props.url} style={{color: '#3E87C6'}} >{props.name}{props.isforked}</a>
+                      <div style= {{backgroundColor: '#3E87C6', color: '#fff'}}>{props.isforked&& 'Forked'}</div>
+                      <div>{props.desc}</div>
                     </div>
                   </Td>
-                  <Td>{this.props.numStars}</Td>
-                  <Td>{this.props.license}</Td>
+                  <Td>{props.numStars}</Td>
+                  <Td>{props.license}</Td>
                 </Tr>
               </Tbody>
             </Table>
           </div> );
-  }
 }
 
 export default Repo;

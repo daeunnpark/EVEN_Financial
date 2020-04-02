@@ -1,19 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../App.css';
 
-
-/**
- * Footer component with copyright
- * @extends Component
- */
-class Footer extends Component{
-
-  render(){
-    return (
-       <div id = "footer" className='Banner'>
-       </div>
-    );
-  }
+const Footer = () =>{
+  return (
+     <div id = "footer" className='Banner' />
+  );
 }
 
 export default Footer;

@@ -6,29 +6,27 @@ import '../App.css';
 
 function SearchEngine(){
   const [msg, setMsg] = useState(true);
+
   const [inputs, setInput] = useState({
     text: '',
     stars: '',
-    license: 'MIT',
+    license: 'mit',
     incForked: false,
   });
 
   const query = queryString.parse(useLocation().search);
   const params = {
-    text: query.text,
-    stars: query.stars,
-    license: query.license,
-    incForked : (query.incForked==="true")
-  }
+    text: (query.text ? query.text : ""),
+    stars: query.stars ? query.stars : "",
+    license: query.license ? query.license : "mit",
+    incForked: (query.fork === "true")
+  };
 
-  useEffect(()=>{
-      if(params.text!=null && params.stars!=null && params.license!=null && params.incForked!=null){
-        setInput(params);
-      }
+  useEffect(() => {
+    setInput(params);
   }, [params.text, params.stars, params.license, params.incForked]);
 
-
-  function onChange(event){
+  function onChange(event) {
     event.preventDefault();
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -40,16 +38,17 @@ function SearchEngine(){
   }
 
   let history = useHistory();
-  function onSubmit(event){
+
+  function onSubmit(event) {
     event.preventDefault();
     setMsg(false);
     const params = new URLSearchParams({
       text: inputs.text,
       stars: inputs.stars,
       license: inputs.license,
-      incForked: inputs.incForked
+      fork: inputs.incForked
     });
-    history.push("search?"+ params);
+    history.push("search?" + params);
   }
 
     return (<div className = "searchEngine">
