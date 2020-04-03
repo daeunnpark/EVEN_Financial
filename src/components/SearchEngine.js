@@ -5,6 +5,7 @@ import '../App.css';
 
 
 function SearchEngine(){
+  const [disabled, setDisable] = useState(true);
   const [inputs, setInput] = useState({
     text: '',
     stars: '',
@@ -20,12 +21,16 @@ function SearchEngine(){
     incForked: (query.fork === "true")
   };
 
+  useEffect(()=>{
+    setDisable(!inputs.text && !inputs.stars);
+  }, [inputs]);
+
   useEffect(() => {
     setInput(params);
   }, [params.text, params.stars, params.license, params.incForked]);
 
   function onChange(event) {
-    event.preventDefault();
+    //event.preventDefault();
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -38,7 +43,7 @@ function SearchEngine(){
   let history = useHistory();
 
   function onSubmit(event) {
-    event.preventDefault();
+    //event.preventDefault();
     const params = new URLSearchParams({
       text: inputs.text,
       stars: inputs.stars,
@@ -50,7 +55,7 @@ function SearchEngine(){
 
     return (<div className = "searchEngine">
               <h3>GitHub Repository Search</h3>
-              <form>
+
                 <div>
                   <div className = "inputsContainer">
                     <div className = "container">
@@ -112,9 +117,9 @@ function SearchEngine(){
                       </div>
                     </div>
                   </div>
-                  <button onClick={onSubmit} className="btn btn-primary">SEARCH</button>
+                  <button onClick={onSubmit} className="btn btn-primary" disabled = {disabled}>SEARCH</button>
                 </div>
-              </form>
+
               <hr/>
 
             </div>
