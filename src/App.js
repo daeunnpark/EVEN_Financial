@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import SearchEngine from './components/SearchEngine';
 import SearchResults from './components/SearchResults';
@@ -12,56 +12,29 @@ import './App.css';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
-class App extends Component{
-  constructor(props){
-    super(props);
 
-    this.state = {
-      loading : false,
-      msg: App.DEFAULT,
-    }
+const App = () => {
+  const [loading, setLoading] = useState(false);
 
-  }
-  componentDidMount(){
+  useEffect(()=> {
     document.title = App.TITLE;
-  }
+  }, []);
 
-  setLoading = (bool) =>{
-    this.setState({loading : bool});
-  }
-
-  setResult = (list) =>{
-    const new_msg =  list.length === 0 ? App.NORESULTS : App.RESULTS;
-
-    this.setState({
-      loading : false,
-      msg : new_msg,
-      search_results : list
-    });
-  }
-
-  render(){
     return (
       <Router>
             <div className="App">
-              <Loader show={this.state.loading} message={'Loading'}>
+              <Loader show={loading} message="">
                 <Header/>
                   <Route path = "/" component = {SearchEngine}/>
-                  <Route path = "/" render = {(props) => <SearchResults setLoading = {this.setLoading} {...props}/>}/>
+                  <Route path = "/" render = {(props) => <SearchResults {...props} setLoading = {setLoading} />}/>
                 <Footer/>
               </Loader>
             </div>
-
       </Router>
-);
-  }
+    );
+
 }
 
-
-
-
 App.TITLE = "Git Repo Search";
-
-
 
 export default App;

@@ -5,8 +5,6 @@ import '../App.css';
 
 
 function SearchEngine(){
-
-
   const [inputs, setInput] = useState({
     text: '',
     stars: '',
@@ -79,8 +77,8 @@ function SearchEngine(){
                           name = "stars"
                           value={inputs.stars}
                           onChange={onChange}
+                          pattern="(>|<|>=|<=|..)?[0-9]+"
                           required
-                          pattern="(>|<|>=|<=)?[0-9]+"
                           />
                       </div>
                     </div>
