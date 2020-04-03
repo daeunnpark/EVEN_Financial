@@ -18,8 +18,13 @@
   padding: 20px 0px;
 }
 
-.searchEngine, .searchMsg  {
+.searchEngine {
   padding: 40px;
+  text-align:center;
+}
+
+.searchMsg{
+  padding-bottom: 40px;
   text-align:center;
 }
 

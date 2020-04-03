@@ -8,6 +8,7 @@ import '../App.css';
 
 function SearchResults(props){
 const [list, setList] = useState([]);
+const [msg, setMsg] = useState(true);
 
 const url = "/repositories?q=";
 
@@ -18,6 +19,7 @@ useEffect(() => {
     q += parsed.stars? "+stars:"+parsed.stars : "";
     q += (parsed.license && parsed.license !== "all") ? "+license:"+ parsed.license : "";
     q += (parsed.fork && parsed.fork==="true")? "+fork:"+parsed.fork : "";
+    console.log(q);
     return q;
   };
 
@@ -29,6 +31,7 @@ useEffect(() => {
       .then(res => {
           setList(res.data.items);
           props.setLoading(false);
+          setMsg(false);
         })
         .catch(error => {
           var errorMsg = "";
@@ -51,7 +54,10 @@ useEffect(() => {
 
   return(
     <React.Fragment>
-       <div className = 'searchMsg'>{list.length===0 ?SearchResults.NORESULTS : SearchResults.RESULTS}</div>
+      <div className = 'searchMsg'>
+      {msg ? SearchResults.DEFAULT :
+       list.length===0 ? SearchResults.NORESULTS : SearchResults.RESULTS }
+     </div>
       {list.map((repo) =>(
           <Repo
             key = {repo.id}
@@ -75,5 +81,6 @@ SearchResults.propTypes = {
   list : PropTypes.array
 }
 
+SearchResults.DEFAULT = 'Please enter query and click SEARCH button above, results appear here.';
 SearchResults.RESULTS = 'SEARCH results:';
 SearchResults.NORESULTS = 'No search results found.';

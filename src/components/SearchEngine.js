@@ -5,7 +5,7 @@ import '../App.css';
 
 
 function SearchEngine(){
-  const [msg, setMsg] = useState(true);
+
 
   const [inputs, setInput] = useState({
     text: '',
@@ -41,7 +41,6 @@ function SearchEngine(){
 
   function onSubmit(event) {
     event.preventDefault();
-    setMsg(false);
     const params = new URLSearchParams({
       text: inputs.text,
       stars: inputs.stars,
@@ -119,12 +118,11 @@ function SearchEngine(){
                 </div>
               </form>
               <hr/>
-              {msg ? <div className = 'searchMsg'>{SearchEngine.DEFAULT}</div>: (null)}
+
             </div>
           );
 
 }
 
-SearchEngine.DEFAULT = 'Please enter query and click SEARCH button above, results appear here.';
 
 export default SearchEngine;

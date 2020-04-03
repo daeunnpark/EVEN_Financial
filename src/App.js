@@ -47,7 +47,7 @@ class App extends Component{
               <Loader show={this.state.loading} message={'Loading'}>
                 <Header/>
                   <Route path = "/" component = {SearchEngine}/>
-                  <Route path = "/search" render = {(props) => <SearchResults setLoading = {this.setLoading} {...props}/>}/>
+                  <Route path = "/" render = {(props) => <SearchResults setLoading = {this.setLoading} {...props}/>}/>
                 <Footer/>
               </Loader>
             </div>
