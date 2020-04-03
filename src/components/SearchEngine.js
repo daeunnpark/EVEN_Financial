@@ -10,7 +10,7 @@ function SearchEngine(){
   const [inputs, setInput] = useState({
     text: '',
     stars: '',
-    license: 'mit',
+    license: 'all',
     incForked: false,
   });
 
@@ -18,7 +18,7 @@ function SearchEngine(){
   const params = {
     text: (query.text ? query.text : ""),
     stars: query.stars ? query.stars : "",
-    license: query.license ? query.license : "mit",
+    license: query.license ? query.license : "all",
     incForked: (query.fork === "true")
   };
 
@@ -93,9 +93,10 @@ function SearchEngine(){
                             License
                           </label><br/>
                         <select className = "inputClass"name ="license" value={inputs.license} onChange={onChange}>
+                            <option value="all">All</option>
                             <option value="mit">MIT</option>
                             <option value="isc">ISC</option>
-                            <option value="apache-2.0">Apache</option>
+                            <option value="apache-2.0">Apache-2.0</option>
                             <option value="gpl">GPL</option>
                           </select>
                         </div>

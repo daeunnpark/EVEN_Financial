@@ -16,12 +16,13 @@ useEffect(() => {
     const parsed = queryString.parse(props.location.search);
     var q=parsed.text? parsed.text : "";
     q += parsed.stars? "+stars:"+parsed.stars : "";
-    q += parsed.license? "+license:"+parsed.license : "";
-    q += parsed.fork? "+fork:"+parsed.fork : "";
+    q += (parsed.license && parsed.license !== "all") ? "+license:"+ parsed.license : "";
+    q += (parsed.fork && parsed.fork==="true")? "+fork:"+parsed.fork : "";
     return q;
   };
 
   const apiCall = (query) => {
+    console.log(query);
     if(query){
       props.setLoading(true);
       axios.get(url+query)
